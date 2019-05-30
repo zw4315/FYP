@@ -72,7 +72,7 @@ def main(args):
     latest_model_idx = []
     for filename in filenames:
         latest_model_idx.append(int(filename[(filename.rfind("step")+4):-4]))
-         
+          
     init_state = max(latest_model_idx)
     print( "The latest version of model is ", init_state)
     
