@@ -1,2 +1,8 @@
 
 mrcnn/mask_rcnn_coco.h5
+*.pyc
+*.jpg
+*.png
+results/result/phase_1
+results/result/phase_2
+results/result/phase_3
