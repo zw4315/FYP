@@ -15,7 +15,7 @@ import torchvision.transforms as transforms
 from torchvision.utils import save_image
 from models import CompletionNetwork
 from PIL import Image
-from utils import poisson_blend, gen_input_mask_predict
+from utils import poisson_blend, gen_input_mask_predict, specify_hole_area,gen_input_specific_mask
 
 
 parser = argparse.ArgumentParser()
@@ -23,7 +23,7 @@ parser = argparse.ArgumentParser()
 
 
 parser.add_argument('--max_holes', type=int, default=1)
-parser.add_argument('--init_model_cn', type=str, default=None)
+parser.add_argument('--init_model_cn', type=str, default='1000') #50holes
 parser.add_argument('--img_size', type=int, default=160)
 parser.add_argument('--hole_min_w', type=int, default=48)
 parser.add_argument('--hole_max_w', type=int, default=96)
@@ -35,8 +35,13 @@ def main(args):
 
     args.model = os.path.expanduser('results/result/phase_3')
     args.config = os.path.expanduser('results/result/config.json')
-    args.input_img = os.path.expanduser('datasets/shuju/test_sub/test3.jpg')
-    args.output_img = os.path.expanduser('results/Remove unwanted objects/remove_person16.jpg')
+    args.input_img = os.path.expanduser('datasets/shuju/test_sub/test_sss.jpg')
+    
+    if not os.path.exists(os.path.expanduser('results/Remove unwanted objects')):
+        os.makedirs('results/Remove unwanted objects')
+        print("The output path does not exist and is creating")
+        
+    args.output_img = os.path.expanduser('results/Remove unwanted objects/remove_test_spec.jpg')
     
         
     if args.init_model_cn == None:
@@ -46,6 +51,7 @@ def main(args):
         for filename in filenames:
             latest_model_idx.append(int(filename[(filename.rfind("step")+4):-4]))      
             latest_state = max(latest_model_idx)
+        latest_state = 100
         args.init_model_cn= 'model_cn_step' + str(latest_state)
     else:
         args.init_model_cn = 'model_cn_step' + args.init_model_cn
@@ -73,15 +79,33 @@ def main(args):
     x = transforms.ToTensor()(img)
     x = torch.unsqueeze(x, dim=0)
 
-    # create mask
+
+    hole_area = specify_hole_area(50,80,80,80)
+    
+    mask_spec = gen_input_specific_mask(
+        shape=x.shape,
+        hole_area = hole_area,
+        hole_size=(
+            (args.hole_min_w, args.hole_max_w),
+            (args.hole_min_h, args.hole_max_h),
+        ),
+        max_holes=args.max_holes,)
         
-    msk= gen_input_mask_predict(                         
+    print("The type of mask_spec is :", type(mask_spec))
+    print("The shape of mask_spec is :", mask_spec.shape)
+        
+    msk_segmentation = gen_input_mask_predict(                         
         image_tensor=x,
-        max_holes=args.max_holes,
         hole_size=args.hole_max_w
     )
+    mask_spec = mask_spec.type(torch.FloatTensor)
+    msk_segmentation = msk_segmentation.type(torch.FloatTensor)
     
-    msk = msk.type(torch.FloatTensor)
+    #msk = torch.mul(mask_spec, msk_segmentation)
+    msk = msk_segmentation
+    #print("What is the shape of MASK? ", msk.shape)
+
+    #msk = msk_segmentation.type(torch.FloatTensor)  # this eliminate the effect of manual hole 
     # inpaint
     with torch.no_grad():
         input =  x - x * msk + mpv * msk
