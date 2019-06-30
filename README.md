@@ -1,1 +1,4 @@
-# Final_Year_Project ## Image Completion Using MASK_RCNN and GLCIC
+# FYP-Image Completion Using MASK_RCNN and GLCIC
+## Introduction
+This repository includes the code for my final year project, using Mask-RCNN and GLCIC to remove unwanted object from image with automatic mask proposal. 
+
