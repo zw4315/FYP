@@ -1,6 +1,6 @@
 # FYP-Image Completion Using MASK_RCNN and GLCIC
 ## Introduction
-This repository includes the code for my final year project, using Mask-RCNN [Jiaming He et. al. 2018] and GLCIC [ Iizuka et. al. 2017] to remove unwanted object from image with automatic mask proposal. 
+This repository includes the code for my final year project, using Mask-RCNN [Jiaming He et. al. 2018] and GLCIC [ Iizuka et. al. 2017] to remove unwanted objects from image with automatic mask proposal. 
 
 **Part of the code is borrowed from otenim's implementation of GICIC and matterport's implementation of Mask-RCNN, great aprreciation to these works. It is highly recommended to run this project in colab environment with GPU notbook becasue most of dependencies are pre-installed in colab. Alternatively, spyder or command line are all possible options.**
 
