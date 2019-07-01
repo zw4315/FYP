@@ -19,4 +19,5 @@ If the code is run in colab, only **pyamg** and **tensorflow-gpu** need installi
 * scipy: 1.2.1
 * GPU: Nvidea Geforce GPU with cuda, 1050Ti at least 
 
+It should be noticed that, inference with test image only need CPU but training requires GPU environment as listed above. 
 
