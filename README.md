@@ -1,5 +1,5 @@
-# FYP-Image Completion Using MASK_RCNN and GLCIC
-## Introduction
+## FYP-Image Completion Using MASK_RCNN and GLCIC
+### Introduction
 This repository includes the code for my final year project, using Mask-RCNN [Jiaming He et. al. 2018] and GLCIC [ Iizuka et. al. 2017] to remove unwanted objects from image with automatic mask proposal. It is highly recommended to run this project in colab environment with GPU notbook becasue most of dependencies are pre-installed in colab. Alternatively, spyder or command line are all possible options. 
 
 **To run the code on colab, the project needs first be downloaded to the user's google drive, then by running the first cell in the notebook, the notebook can be connected to the google drive**
@@ -9,7 +9,7 @@ This repository includes the code for my final year project, using Mask-RCNN [Ji
 
 ![Demo](https://raw.githubusercontent.com/zw4315/FYP/master/results/result/demo.jpg)
 
-## Dependencies
+### Dependencies
 If the code is run in colab, only **pyamg** and **tensorflow-gpu** need installing, and they are written in the notebook so please just follow the order to run each cell. However, if the code is run in local python 3.6.5 environment, further dependencies need installing as well including:
 * torch: 1.0.1post2
 * torchvision: 0.2.2.post3
