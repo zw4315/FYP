@@ -11,12 +11,12 @@ This repository includes the code for my final year project, using Mask-RCNN [Ji
 
 ## Dependencies
 If the code is run in colab, only **pyamg** and **tensorflow-gpu** need installing, and they are written in the notebook so please just follow the order to run each cell. However, if the code is run in local python 3.6.5 environment, further dependencies need installing as well including:
-*torch: 1.0.1post2
-*torchvision: 0.2.2.post3
-*tqdm: 4.31.1
-*Pillow: 5.4.1
-*numpy: 1.16.2
-*scipy: 1.2.1
-*GPU: Nvidea Geforce GPU with cuda, 1050Ti at least 
+* torch: 1.0.1post2
+* torchvision: 0.2.2.post3
+* tqdm: 4.31.1
+* Pillow: 5.4.1
+* numpy: 1.16.2
+* scipy: 1.2.1
+* GPU: Nvidea Geforce GPU with cuda, 1050Ti at least 
 
 
